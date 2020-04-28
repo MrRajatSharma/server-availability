@@ -4,15 +4,36 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src",
+    "lint": "eslint src test",
+    "test": "nyc mocha --recursive",
+    "test:coverage": "nyc report --reporter=lcov | npm run test"
   },
-  "author": "",
+  "author": "Rajat Sharma",
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.2.0",
+    "chai-sorted": "^0.2.0",
     "mocha": "^7.1.2",
+    "nock": "^12.0.3",
     "nyc": "^15.0.1",
     "sinon": "^9.0.2",
     "sinon-chai": "^3.5.0"
+  },
+  "mocha": {
+    "globals": "global",
+    "require": "test/setup.js"
+  },
+  "nyc": {
+    "all": true,
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "src/index.js"
+    ]
+  },
+  "dependencies": {
+    "request": "^2.88.2"
   }
 }
